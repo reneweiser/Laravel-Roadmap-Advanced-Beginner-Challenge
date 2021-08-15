@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Country;
 
 class ClientController extends Controller
 {
@@ -13,7 +14,9 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('clients.create');
+        $countries = Country::all();
+
+        return view('clients.create', compact('countries'));
     }
 
     public function store()
@@ -25,7 +28,9 @@ class ClientController extends Controller
 
     public function edit(Client $client)
     {
-        return view('clients.edit', ['client' => $client]);
+        $countries = Country::all();
+
+        return view('clients.edit', compact('client', 'countries'));
     }
 
     public function update(Client $client)
@@ -48,7 +53,7 @@ class ClientController extends Controller
             'company' => 'required|string',
             'vat' => 'required|string',
             'country' => 'required|string|size:2',
-            'postal_code' => ['required', 'regex:/[\d]{6}/i'],
+            'postal_code' => 'required|string|min:5',
             'city' => 'required|string',
             'street' => 'required|string',
         ]);

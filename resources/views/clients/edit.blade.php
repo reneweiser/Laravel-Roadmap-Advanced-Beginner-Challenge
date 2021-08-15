@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Users
+            {{ $client->company }}
         </h2>
+        <h3 class="subtitle">Edit Client</h3>
     </x-slot>
 
     <div class="py-12">
@@ -35,9 +36,9 @@
                             <label>
                                 Country:
                                 <select name="country">
-                                    <option value="US">United States of America</option>
-                                    <option value="GB">United Kingdom of Great Britain and Northern Ireland</option>
-                                    <option value="DE">Germany</option>
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->code }}" {{ $client->country == $country->code ? 'selected' : '' }}>{{ $country->name }}</option>
+                                    @endforeach
                                 </select>
                             </label>
                         </div>
