@@ -22,11 +22,12 @@
                         @foreach($projects as $project)
                             <tr>
                                 <td>{{ $project->title }}</td>
-                                <td>{{ $project->deadline }}</td>
+                                <td>{{ $project->deadline_formatted }}</td>
                                 <td>{{ $project->user->name }}</td>
                                 <td>{{ $project->client->company }}</td>
                                 <td>{{ $project->status->name }}</td>
                                 <td>
+                                    <a href="{{ route('projects.show', $project) }}">Open</a>
                                     <a href="{{ route('projects.edit', $project) }}">Edit</a>
                                     <form action="{{ route('projects.destroy', $project) }}" method="POST">
                                         @csrf

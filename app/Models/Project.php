@@ -21,11 +21,14 @@ class Project extends Model
         'status_id',
     ];
 
-    protected $appends = ['deadline_for_date_inputs'];
-
     public function getDeadlineForDateInputsAttribute()
     {
         return (new Carbon($this->deadline))->format('Y-m-d\TH:i');
+    }
+
+    public function getDeadlineFormattedAttribute()
+    {
+        return (new Carbon($this->deadline))->format('m/d/Y');
     }
 
     public function user()
@@ -41,5 +44,10 @@ class Project extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }

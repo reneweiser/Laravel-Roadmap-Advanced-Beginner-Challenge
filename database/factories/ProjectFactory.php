@@ -3,22 +3,20 @@
 namespace Database\Factories;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Project::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+    public function configure()
+    {
+        return $this->afterCreating(function (Project $project) {
+            Task::factory()->count(5)->create(['project_id' => $project->id]);
+        });
+    }
+
     public function definition()
     {
         return [
