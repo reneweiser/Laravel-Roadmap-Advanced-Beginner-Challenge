@@ -27,7 +27,7 @@
                                 <td>{{ $project->client->company }}</td>
                                 <td>{{ $project->status->name }}</td>
                                 <td>
-                                    <a href="#">Edit</a>
+                                    <a href="{{ route('projects.edit', $project) }}">Edit</a>
                                     <a href="#">Delete</a>
                                 </td>
                             </tr>

@@ -26,7 +26,30 @@ class ProjectController extends Controller
 
     public function store()
     {
-        $validatedData = request()->validate([
+        Project::create($this->validatedProjectData());
+
+        return redirect()->route('projects.index');
+    }
+
+    public function edit(Project $project)
+    {
+        $users = User::select(['id', 'name'])->get();
+        $clients = Client::select(['id', 'company'])->get();
+        $status = Status::all();
+
+        return view('projects.edit', compact('project', 'users', 'clients', 'status'));
+    }
+
+    public function update(Project $project)
+    {
+        $project->update($this->validatedProjectData());
+
+        return redirect()->route('projects.index');
+    }
+
+    private function validatedProjectData()
+    {
+        return request()->validate([
             'title' => 'required|string',
             'description' => 'string|nullable',
             'deadline' => 'required|date',
@@ -34,9 +57,5 @@ class ProjectController extends Controller
             'client_id' => 'required|exists:clients,id',
             'status_id' => 'required|exists:status,id',
         ]);
-
-        Project::create($validatedData);
-
-        return redirect()->route('projects.index');
     }
 }
