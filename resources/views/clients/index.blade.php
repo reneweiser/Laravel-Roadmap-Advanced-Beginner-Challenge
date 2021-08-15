@@ -9,18 +9,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <a href="{{ route('clients.create') }}">Create</a>
                     <table class="w-full">
                         <tr>
-                            <th>Name</th>
-                            <th>E-Mail</th>
+                            <th>Company</th>
+                            <th>VAT</th>
+                            <th>Address</th>
                             <th></th>
                         </tr>
-                        @foreach($users as $user)
+                        @foreach($clients as $client)
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $client->company }}</td>
+                                <td>{{ $client->vat }}</td>
+                                <td>{{ $client->address }}</td>
                                 <td>
-                                    <a href="#">Settings</a>
+                                    <a href="#">Edit</a>
+                                    <a href="#">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
