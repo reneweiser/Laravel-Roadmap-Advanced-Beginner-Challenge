@@ -8,7 +8,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        return view('clients.index', ['clients' => Client::all()]);
+        return view('clients.index', ['clients' => Client::orderByDesc('updated_at')->get()]);
     }
 
     public function create()
@@ -18,7 +18,26 @@ class ClientController extends Controller
 
     public function store()
     {
-        $validatedData = request()->validate([
+        Client::create($this->validatedClientData());
+
+        return redirect()->route('clients.index');
+    }
+
+    public function edit(Client $client)
+    {
+        return view('clients.edit', ['client' => $client]);
+    }
+
+    public function update(Client $client)
+    {
+        $client->update($this->validatedClientData());
+
+        return redirect()->route('clients.index');
+    }
+
+    private function validatedClientData()
+    {
+        return request()->validate([
             'company' => 'required|string',
             'vat' => 'required|string',
             'country' => 'required|string|size:2',
@@ -26,9 +45,5 @@ class ClientController extends Controller
             'city' => 'required|string',
             'street' => 'required|string',
         ]);
-
-        Client::create($validatedData);
-
-        return redirect()->route('clients.index');
     }
 }

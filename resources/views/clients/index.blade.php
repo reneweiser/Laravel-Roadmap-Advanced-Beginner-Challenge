@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Users
+            Clients
         </h2>
     </x-slot>
 
@@ -23,7 +23,7 @@
                                 <td>{{ $client->vat }}</td>
                                 <td>{{ $client->address }}</td>
                                 <td>
-                                    <a href="#">Edit</a>
+                                    <a href="{{ route('clients.edit', $client) }}">Edit</a>
                                     <a href="#">Delete</a>
                                 </td>
                             </tr>
