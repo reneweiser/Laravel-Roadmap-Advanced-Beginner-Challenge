@@ -24,7 +24,11 @@
                                 <td>{{ $client->address }}</td>
                                 <td>
                                     <a href="{{ route('clients.edit', $client) }}">Edit</a>
-                                    <a href="#">Delete</a>
+                                    <form action="{{ route('clients.destroy', $client) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

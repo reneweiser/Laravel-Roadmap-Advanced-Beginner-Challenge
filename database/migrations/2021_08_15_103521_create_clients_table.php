@@ -21,6 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('postal_code');
             $table->string('city');
             $table->string('street');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

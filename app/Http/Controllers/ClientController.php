@@ -35,6 +35,13 @@ class ClientController extends Controller
         return redirect()->route('clients.index');
     }
 
+    public function destroy(Client $client)
+    {
+        $client->delete();
+
+        return redirect()->route('clients.index');
+    }
+
     private function validatedClientData()
     {
         return request()->validate([
