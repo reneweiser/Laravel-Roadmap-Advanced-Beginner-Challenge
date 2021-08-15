@@ -28,7 +28,11 @@
                                 <td>{{ $project->status->name }}</td>
                                 <td>
                                     <a href="{{ route('projects.edit', $project) }}">Edit</a>
-                                    <a href="#">Delete</a>
+                                    <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

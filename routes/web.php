@@ -27,11 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::resource('clients', ClientController::class)->except('show');
-    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
-    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
-    Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::resource('projects', ProjectController::class)->except('show');
 });
 
 require __DIR__.'/auth.php';
